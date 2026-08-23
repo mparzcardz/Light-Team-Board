@@ -1,0 +1,85 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#ffffff">
+<title>MParz Cardz Team Board</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;background:linear-gradient(#fff,#f2f4f7);color:#111827;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+.app{max-width:1300px;margin:auto;padding:18px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:50px;height:50px;border-radius:15px;background:#111827;color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px}
+h1{margin:0;font-size:24px} .sub{color:#667085;font-size:13px;margin-top:3px}
+button{font:inherit;cursor:pointer}
+.reset{padding:11px 16px;border:1px solid #d8dee8;border-radius:12px;background:#fff;font-weight:800;color:#111827}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#eef1f5;border:1px solid #d8dee8;padding:6px;border-radius:16px;margin-bottom:14px}
+.tab{border:0;background:transparent;color:#667085;padding:14px;border-radius:11px;font-size:17px;font-weight:900}
+.tab.active{background:#111827;color:#fff}
+.topline{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.title{font-size:20px;font-weight:900} .count{color:#667085;font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.team{position:relative;overflow:hidden;min-height:132px;padding:18px;border-radius:19px;border:1px solid #d9dee7;border-left:7px solid var(--team-color);background:linear-gradient(145deg,#fff,#f7f9fb);box-shadow:0 4px 12px rgba(15,23,42,.08);display:flex;flex-direction:column;justify-content:center;user-select:none;transition:.12s}
+.team:active{transform:scale(.975)}
+.team::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,color-mix(in srgb,var(--team-color) 13%,transparent),transparent 60%);pointer-events:none}
+.team-logo{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:78px;height:78px;object-fit:contain;filter:drop-shadow(0 2px 3px #0002);z-index:1}
+.team-info{position:relative;z-index:2;padding-right:78px}
+.abbr{font-size:12px;font-weight:900;color:#667085;letter-spacing:1px;margin-bottom:7px}
+.name{font-size:18px;line-height:1.15;font-weight:900}
+.check{position:absolute;right:10px;top:10px;width:25px;height:25px;border-radius:50%;border:1px solid #9aa3b2;background:#fff;display:grid;place-items:center;color:transparent;font-size:14px;z-index:3}
+.team.done{opacity:.38;filter:grayscale(1);background:#e5e7eb;text-decoration:line-through}
+.team.done .check{background:#111827;color:#fff;border-color:#111827}
+.team.done::before{background:none}
+.footer{margin-top:16px;text-align:center;color:#7b8494;font-size:12px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:650px){.app{padding:12px}h1{font-size:20px}.grid{grid-template-columns:repeat(2,1fr);gap:11px}.team{min-height:115px;padding:15px}.team-logo{width:62px;height:62px;right:9px}.team-info{padding-right:62px}.name{font-size:15px}}
+</style><style id="ipad-air-fit">
+body{overflow:hidden!important}
+.app{max-width:none!important;height:100vh!important;height:100dvh!important;padding:8px 12px!important;display:flex!important;flex-direction:column!important}
+header{margin-bottom:6px!important;min-height:38px!important}.logo{width:36px!important;height:36px!important;border-radius:10px!important;font-size:14px!important}
+h1{font-size:19px!important}.sub{font-size:10px!important;margin-top:1px!important}.reset{padding:7px 12px!important;border-radius:9px!important;font-size:13px!important}
+.tabs{margin-bottom:6px!important;padding:4px!important;gap:5px!important;border-radius:12px!important}.tab{padding:7px 8px!important;border-radius:8px!important;font-size:14px!important}
+.topline{margin-bottom:6px!important;min-height:22px!important}.title{font-size:16px!important}.count{font-size:12px!important}
+.grid{flex:1 1 auto!important;min-height:0!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;grid-template-rows:repeat(8,minmax(0,1fr))!important;gap:5px 7px!important}
+.team{min-height:0!important;height:auto!important;padding:5px 8px!important;border-radius:10px!important;border-left-width:5px!important;box-shadow:0 1px 4px rgba(15,23,42,.08)!important}
+.team-logo{width:38px!important;height:38px!important;right:7px!important}.team-info{padding-right:40px!important}
+.abbr{font-size:9px!important;margin-bottom:1px!important;letter-spacing:.7px!important}.name{font-size:12px!important;line-height:1.03!important}
+.check{width:16px!important;height:16px!important;right:4px!important;top:4px!important;font-size:9px!important}.footer{display:none!important}
+@media(orientation:portrait){body{overflow:auto!important}.app{height:auto!important;min-height:100dvh!important}.grid{grid-template-columns:repeat(3,1fr)!important;grid-template-rows:none!important}.team{min-height:72px!important}}
+</style></head>
+<body><div class="app">
+<header><div class="brand"><div class="logo">MP</div><div><h1>MParz Cardz</h1><div class="sub">Live Break Team Board</div></div></div><button class="reset" id="reset">Reset</button></header>
+<div class="tabs"><button class="tab active" data-league="MLB">⚾ MLB</button><button class="tab" data-league="NBA">🏀 NBA</button><button class="tab" data-league="NFL">🏈 NFL</button></div>
+<div class="topline"><div class="title" id="title">MLB Teams</div><div class="count" id="count"></div></div>
+<div class="grid" id="grid"></div>
+<div class="footer">Tap a team to cross it off. Tap again to restore it. Progress is saved on this device.</div>
+</div>
+<script>
+const teams={"MLB":[["ARI","Arizona Diamondbacks"],["ATL","Atlanta Braves"],["BAL","Baltimore Orioles"],["BOS","Boston Red Sox"],["CHW","Chicago White Sox"],["CHC","Chicago Cubs"],["CIN","Cincinnati Reds"],["CLE","Cleveland Guardians"],["COL","Colorado Rockies"],["DET","Detroit Tigers"],["HOU","Houston Astros"],["KC","Kansas City Royals"],["LAA","Los Angeles Angels"],["LAD","Los Angeles Dodgers"],["MIA","Miami Marlins"],["MIL","Milwaukee Brewers"],["MIN","Minnesota Twins"],["NYM","New York Mets"],["NYY","New York Yankees"],["ATH","Athletics"],["PHI","Philadelphia Phillies"],["PIT","Pittsburgh Pirates"],["SD","San Diego Padres"],["SF","San Francisco Giants"],["SEA","Seattle Mariners"],["STL","St. Louis Cardinals"],["TB","Tampa Bay Rays"],["TEX","Texas Rangers"],["TOR","Toronto Blue Jays"],["WSH","Washington Nationals"]],"NBA":[["ATL","Atlanta Hawks"],["BOS","Boston Celtics"],["BKN","Brooklyn Nets"],["CHA","Charlotte Hornets"],["CHI","Chicago Bulls"],["CLE","Cleveland Cavaliers"],["DAL","Dallas Mavericks"],["DEN","Denver Nuggets"],["DET","Detroit Pistons"],["GSW","Golden State Warriors"],["HOU","Houston Rockets"],["IND","Indiana Pacers"],["LAC","LA Clippers"],["LAL","Los Angeles Lakers"],["MEM","Memphis Grizzlies"],["MIA","Miami Heat"],["MIL","Milwaukee Bucks"],["MIN","Minnesota Timberwolves"],["NOP","New Orleans Pelicans"],["NYK","New York Knicks"],["OKC","Oklahoma City Thunder"],["ORL","Orlando Magic"],["PHI","Philadelphia 76ers"],["PHX","Phoenix Suns"],["POR","Portland Trail Blazers"],["SAC","Sacramento Kings"],["SAS","San Antonio Spurs"],["TOR","Toronto Raptors"],["UTA","Utah Jazz"],["WAS","Washington Wizards"]],"NFL":[["ARI","Arizona Cardinals"],["ATL","Atlanta Falcons"],["BAL","Baltimore Ravens"],["BUF","Buffalo Bills"],["CAR","Carolina Panthers"],["CHI","Chicago Bears"],["CIN","Cincinnati Bengals"],["CLE","Cleveland Browns"],["DAL","Dallas Cowboys"],["DEN","Denver Broncos"],["DET","Detroit Lions"],["GB","Green Bay Packers"],["HOU","Houston Texans"],["IND","Indianapolis Colts"],["JAX","Jacksonville Jaguars"],["KC","Kansas City Chiefs"],["LV","Las Vegas Raiders"],["LAC","Los Angeles Chargers"],["LAR","Los Angeles Rams"],["MIA","Miami Dolphins"],["MIN","Minnesota Vikings"],["NE","New England Patriots"],["NO","New Orleans Saints"],["NYG","New York Giants"],["NYJ","New York Jets"],["PHI","Philadelphia Eagles"],["PIT","Pittsburgh Steelers"],["SF","San Francisco 49ers"],["SEA","Seattle Seahawks"],["TB","Tampa Bay Buccaneers"],["TEN","Tennessee Titans"],["WAS","Washington Commanders"]]};
+const colors={"MLB":{"ARI":"#A71930","ATL":"#CE1141","BAL":"#DF4601","BOS":"#BD3039","CHW":"#27251F","CHC":"#0E3386","CIN":"#C6011F","CLE":"#E31937","COL":"#333366","DET":"#0C2340","HOU":"#002D62","KC":"#004687","LAA":"#BA0021","LAD":"#005A9C","MIA":"#00A3E0","MIL":"#12284B","MIN":"#002B5C","NYM":"#002D72","NYY":"#003087","ATH":"#003831","PHI":"#E81828","PIT":"#FDB827","SD":"#2F241D","SF":"#FD5A1E","SEA":"#0C2C56","STL":"#C41E3A","TB":"#092C5C","TEX":"#003278","TOR":"#134A8E","WSH":"#AB0003"},"NBA":{"ATL":"#E03A3E","BOS":"#007A33","BKN":"#000000","CHA":"#1D1160","CHI":"#CE1141","CLE":"#860038","DAL":"#00538C","DEN":"#0E2240","DET":"#C8102E","GSW":"#1D428A","HOU":"#CE1141","IND":"#002D62","LAC":"#C8102E","LAL":"#552583","MEM":"#5D76A9","MIA":"#98002E","MIL":"#00471B","MIN":"#0C2340","NOP":"#0C2340","NYK":"#006BB6","OKC":"#007AC1","ORL":"#0077C0","PHI":"#006BB6","PHX":"#1D1160","POR":"#E03A3E","SAC":"#5A2D81","SAS":"#C4CED4","TOR":"#CE1141","UTA":"#002B5C","WAS":"#002B5C"},"NFL":{"ARI":"#97233F","ATL":"#A71930","BAL":"#241773","BUF":"#00338D","CAR":"#0085CA","CHI":"#0B162A","CIN":"#FB4F14","CLE":"#FF3C00","DAL":"#003594","DEN":"#FB4F14","DET":"#0076B6","GB":"#203731","HOU":"#03202F","IND":"#002C5F","JAX":"#006778","KC":"#E31837","LV":"#000000","LAC":"#0080C6","LAR":"#003594","MIA":"#008E97","MIN":"#4F2683","NE":"#002244","NO":"#D3BC8D","NYG":"#0B2265","NYJ":"#125740","PHI":"#004C54","PIT":"#FFB612","SF":"#AA0000","SEA":"#002244","TB":"#D50A0A","TEN":"#0C2340","WAS":"#5A1414"}};
+const logoCodes={"MLB":{"ARI":"ari","ATL":"atl","BAL":"bal","BOS":"bos","CHW":"chw","CHC":"chc","CIN":"cin","CLE":"cle","COL":"col","DET":"det","HOU":"hou","KC":"kc","LAA":"laa","LAD":"lad","MIA":"mia","MIL":"mil","MIN":"min","NYM":"nym","NYY":"nyy","ATH":"oak","PHI":"phi","PIT":"pit","SD":"sd","SF":"sf","SEA":"sea","STL":"stl","TB":"tb","TEX":"tex","TOR":"tor","WSH":"wsh"},"NBA":{"ATL":"atl","BOS":"bos","BKN":"bkn","CHA":"cha","CHI":"chi","CLE":"cle","DAL":"dal","DEN":"den","DET":"det","GSW":"gs","HOU":"hou","IND":"ind","LAC":"lac","LAL":"lal","MEM":"mem","MIA":"mia","MIL":"mil","MIN":"min","NOP":"no","NYK":"ny","OKC":"okc","ORL":"orl","PHI":"phi","PHX":"phx","POR":"por","SAC":"sac","SAS":"sa","TOR":"tor","UTA":"utah","WAS":"wsh"},"NFL":{"ARI":"ari","ATL":"atl","BAL":"bal","BUF":"buf","CAR":"car","CHI":"chi","CIN":"cin","CLE":"cle","DAL":"dal","DEN":"den","DET":"det","GB":"gb","HOU":"hou","IND":"ind","JAX":"jax","KC":"kc","LV":"lv","LAC":"lac","LAR":"lar","MIA":"mia","MIN":"min","NE":"ne","NO":"no","NYG":"nyg","NYJ":"nyj","PHI":"phi","PIT":"pit","SF":"sf","SEA":"sea","TB":"tb","TEN":"ten","WAS":"wsh"}};
+let league=localStorage.getItem("mparz-league")||"MLB";
+let state=JSON.parse(localStorage.getItem("mparz-state")||"{}");
+function logoUrl(l,a){return "https://a.espncdn.com/i/teamlogos/"+l.toLowerCase()+"/500/"+logoCodes[l][a]+".png"}
+function save(){localStorage.setItem("mparz-state",JSON.stringify(state));localStorage.setItem("mparz-league",league)}
+function render(){
+ document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.league===league));
+ document.getElementById("title").textContent=league+" Teams";
+ const list=teams[league], remaining=list.filter(t=>!state[league+"_"+t[0]]).length;
+ document.getElementById("count").textContent=remaining+" remaining · "+(list.length-remaining)+" crossed off";
+ const grid=document.getElementById("grid"); grid.innerHTML="";
+ list.forEach(([abbr,name])=>{
+  const done=!!state[league+"_"+abbr], el=document.createElement("div");
+  el.className="team"+(done?" done":""); el.style.setProperty("--team-color",colors[league][abbr]);
+  el.innerHTML='<div class="check">✓</div><img class="team-logo" src="'+logoUrl(league,abbr)+'" alt=""><div class="team-info"><div class="abbr">'+abbr+'</div><div class="name">'+name+'</div></div>';
+  el.onclick=()=>{state[league+"_"+abbr]=!done;save();render()};
+  grid.appendChild(el);
+ });
+}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{league=b.dataset.league;save();render()});
+document.getElementById("reset").onclick=()=>{if(confirm("Reset all "+league+" teams?")){teams[league].forEach(t=>delete state[league+"_"+t[0]]);save();render()}};
+render();
+</script></body></html>
